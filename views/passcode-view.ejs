@@ -1,0 +1,42 @@
+<!-- <%- include('partials/header') %>
+<div class="px-12 py-6">
+    <h2 class="text-3xl capitalize mb-4">Hey <%= user.username %>👋</h2>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="flex justify-between items-center mb-4">
+            <div class="flex gap-4 items-center">
+                <% if (hisaab.encryption) { %>
+                    <div class="p-2 bg-gray-200 rounded-md">
+                        <i class="ri-lock-password-line text-red-500 font-semibold text-xl"></i>
+                    </div>
+                <% } %>
+                <% if (hisaab.availability) { %>
+                    <div class="p-2 bg-gray-200 rounded-md">
+                        <i class="ri-eye-off-fill text-red-500 font-semibold text-xl"></i>
+                    </div>
+                <% } %>
+                <% if (hisaab.shareable) { %>
+                    <div class="p-2 bg-gray-200 rounded-md">
+                        <i class="ri-share-box-fill text-red-500 font-semibold text-xl"></i>
+                    </div>
+                <% } %>
+                <a href="/hisaab/edit/<%= hisaab._id %>" class="p-2 bg-gray-200 rounded-md hover:bg-gray-300">
+                    <i class="ri-edit-line text-blue-500 font-semibold text-xl"></i>
+                </a>
+                <form action="/hisaab/delete/<%= hisaab._id %>" method="POST" class="inline">
+                    <button type="submit" class="p-2 bg-gray-200 rounded-md hover:bg-gray-300">
+                        <i class="ri-delete-bin-6-line text-red-500 font-semibold text-xl"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <p class="text-sm text-gray-500 mb-2">Created: <%= moment(hisaab.createdAt).format('DD/MM/YYYY') %></p>
+        <h2 class="text-2xl font-semibold mb-4"><%= hisaab.title %></h2>
+        <p class="text-gray-700 leading-7"><%= hisaab.description %></p>
+    </div>
+
+    <div class="mt-4">
+        <a href="/profile" class="text-gray-500 hover:text-gray-700">← Back to Profile</a>
+    </div>
+</div>
+<%- include('partials/footer') %> -->

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>heelo</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-zinc-100 min-h-screen flex flex-col">
+    <nav class="flex items-center resize-none justify-between p-6 bg-red-500">
+        <!-- Left Side -->
+        <div>
+            <!-- Logo and Name -->
+            <span class="text-white font-bold text-xl">Khatabook</span>
+        </div>
+
+        
+        
+        <!-- Right Side -->
+         <% var loggin = typeof loggin !== "undefined" ? loggin : true %>
+       <%  if(loggin ){ %>
+            <div class="flex items-center">
+                <!-- Menu Items -->
+                <ul class="flex space-x-8 text-white">
+                    <li>
+                        <a href="/hisaab/create">Create New Khata</a>
+                    </li>
+                    <li>
+                        <a class="px-1 bg-white rounded-lg py-1 font-semibold text-red-500" href="/logout"><i class="ri-logout-box-r-line"></i></a>
+                    </li>
+                </ul>
+            </div>
+        <% } %>
+        
+    </nav>

@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+    <div class="h-92 mt-4 flex flex-col justify-center items-center">
+        <div class="max-w-md w-full p-8 bg-white rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-red-500 mb-8">Register User</h2>
+            <form method="post" action="/register">
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700">Username</label>
+                    <input type="text" id="username" name="username" class="w-full px-3 py-2 border rounded-md">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" class="w-full px-3 py-2 border rounded-md">
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" class="w-full px-3 py-2 border rounded-md">
+                </div>
+                <div class="mb-8">
+                    <label for="confirm-password" class="block text-gray-700">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" class="w-full px-3 py-2 border rounded-md">
+                </div>
+                <button type="submit" class="w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600">Register</button>
+            </form>
+            <p class="mt-4 text-black text-center">Already a user? <a href="/" class="text-red-500">Login here</a></p>
+        </div>
+    </div>
+    <div class="mt-4 ml-20">
+        <a href="/" class="text-gray-500 hover:text-gray-700">← Back to Home</a>
+    </div>
+    <%- include('./partials/footer.ejs') %>

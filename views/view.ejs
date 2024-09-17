@@ -1,0 +1,105 @@
+<%- include('partials/header') %>
+<div class="px-12 py-6">
+    <h2 class="text-3xl capitalize mb-4">Hey <%= user.username %>👋</h2>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="flex justify-between items-center mb-4">
+            <div class="flex gap-4 items-center">
+                <% if (hisaab.encryption) { %>
+                    <div class="p-2 bg-gray-200 rounded-md">
+                        <i class="ri-lock-password-line text-red-500 font-semibold text-xl"></i>
+                    </div>
+                <% } %>
+                <% if (hisaab.availability) { %>
+                    <div class="p-2 bg-gray-200 rounded-md">
+                        <i class="ri-eye-off-fill text-red-500 font-semibold text-xl"></i>
+                    </div>
+                <% } %>
+                <% if (hisaab.shareable) { %>
+                    <div class="p-2 bg-gray-200 rounded-md">
+                        <i class="ri-share-box-fill text-red-500 font-semibold text-xl"></i>
+                    </div>
+                <% } %>
+                <% if (hisaab.editpermissions) { %>
+                <button id="editBtn" class="p-2 bg-gray-200 rounded-md hover:bg-gray-300">
+                    <i class="ri-edit-line text-blue-500 font-semibold text-xl"></i>
+                </button>
+                <% } %>
+
+                <form action="/hisaab/delete/<%= hisaab._id %>" method="POST" class="inline">
+                    <button type="submit" class="p-2 bg-gray-200 rounded-md hover:bg-gray-300">
+                        <i class="ri-delete-bin-6-line text-red-500 font-semibold text-xl"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <p class="text-sm text-gray-500 mb-2">Created: <%= moment(hisaab.createdAt).format('DD/MM/YYYY') %></p>
+        <h2 class="text-2xl font-semibold mb-4"><%= hisaab.title %></h2>
+        <p class="text-gray-700 leading-7"><%= hisaab.description %></p>
+    </div>
+
+    <div class="mt-4">
+        <a href="/profile" class="text-gray-500 hover:text-gray-700">← Back to Profile</a>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold text-red-500">Edit Hisaab</h2>
+            <button id="closeModal" class="text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+        </div>
+        <form method="post" action="/hisaab/update/<%= hisaab._id %>">
+            <div class="mb-4">
+                <label for="title" class="block text-gray-700">Title</label>
+                <input type="text" id="title" name="title" class="w-full px-3 py-2 border rounded-md" value="<%= hisaab.title %>" required />
+            </div>
+            <div class="mb-4">
+                <label for="description" class="block text-gray-700">Description</label>
+                <textarea id="description" name="description" class="w-full px-3 py-2 border rounded-md resize-none" required><%= hisaab.description %></textarea>
+            </div>
+            <div class="mb-2">
+                <input type="checkbox" id="encryption" name="encryption" class="mr-2" onclick="document.getElementById('passcodeField').classList.toggle('hidden', !this.checked)" <%= hisaab.encryption ? 'checked' : '' %> />
+                Mark if encryption is required
+            </div>
+            <div id="passcodeField" class="mb-2 <%= hisaab.encryption ? '' : 'hidden' %>">
+                <input type="password" autocomplete="off" autocomplete="off"  id="passcode" placeholder="Enter password for encryption" name="passcode" class="w-full px-3 py-2 border rounded-md" value="<%= hisaab.passcode %>" />
+            </div>
+            <div class="flex items-center justify-between gap-32 w-full">
+                <div class="mb-4">
+                    <label for="shareable" class="block text-gray-700">Shareable?</label>
+                    <input type="checkbox" id="shareable" name="shareable" class="mr-2" <%= hisaab.shareable ? 'checked' : '' %> />
+                    Mark if shareable
+                </div>
+                <div class="mb-4">
+                    <label for="editPermission" class="block text-gray-700">Edit Permission</label>
+                    <input type="checkbox" id="editPermission" name="editPermission" class="mr-2" <%= hisaab.editpermissions ? 'checked' : '' %> />
+                    Mark if edit permission is required
+                </div>
+            </div>
+            <button type="submit" class="w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600">
+                Update Hisaab
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById('editBtn').addEventListener('click', function () {
+        document.getElementById('editModal').classList.remove('hidden');
+    });
+
+    document.getElementById('closeModal').addEventListener('click', function () {
+        document.getElementById('editModal').classList.add('hidden');
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const encryptionCheckbox = document.getElementById("encryption");
+        const passcodeField = document.getElementById("passcodeField");
+        if (encryptionCheckbox.checked) {
+            passcodeField.classList.remove("hidden");
+        }
+    });
+</script>
+<%- include('partials/footer') %>
